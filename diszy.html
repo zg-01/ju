@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			ul{
+            list-style: none;
+        }
+        dl dt{
+            float: left;
+        }
+        
+        .test2 #introduce{
+            vertical-align: bottom;
+        }
+        .test2 p{
+            margin: 2px auto;
+        }
+        .test2 p input[type=submit],
+        .test2 p input[type=reset]{
+            width: 40px;
+        }
+        .test3 dl dt,
+        .test3 dl dd{
+            height: 40px;
+            line-height: 40px;
+        }
+        .test3 dl dt{
+            text-align: center;
+            width: 80px;
+            background-color: purple;
+            border-right: 1px solid white;
+        }
+        .test3 dl dd{
+            text-indent: .2em;
+            margin: 5px;
+            width: 500px;
+            background-color: lightblue;
+        }
+        .test3 dl dd:last-child{
+            background: blueviolet;
+            text-indent: 0;
+            text-align: center;
+        }
+    </style>
+	</head>
+	<body>
+		<h1>第一题</h1>
+		<p>
+			<input type="checkbox" class="check_all" id="checkAll">
+			<label for="checkAll">全选/全不选</label>
+			<input type="button" class="reverse_check_all" value="反选">
+		</p>
+		<ul class="checkbox_list">
+			<li><input type="checkbox" name="jk" id="jk"><label for="jk">jk</label></li>
+			<li><input type="checkbox" name="hs" id="hs"><label for="hs">黑丝</label></li>
+			<li><input type="checkbox" name="yww" id="yww"><label for="yww">渔网袜</label></li>
+			<li><input type="checkbox" name="llt" id="llt"><label for="llt">洛丽塔</label></li>
+			<li><input type="checkbox" name="cdq" id="cdq"><label for="cdq">超短裙</label></li>
+		</ul>
+		<hr>
+		<script>
+			{
+            let checkAll = document.querySelector('.check_all');
+            let reverseCheckAll = document.querySelector('.reverse_check_all');
+            let lists = document.querySelectorAll('.checkbox_list li input[type="checkbox"]');
+            let checkCount = 0;
+            lists.forEach( item => {
+                item.onchange = function () {
+                    isCheckAll(lists);
+                }
+            });
+            checkAll.onchange = function () {
+                checkStatus(lists, this.checked);
+            }
+            reverseCheckAll.onclick = function () {
+                checkStatus(lists);
+                isCheckAll(lists);
+            }
+            function checkCountFun (list) {
+                let count = 0;
+                list.forEach( item => {
+                    item.checked ? count++ : '';
+                });
+                return count;
+            }
+            function isCheckAll (list) {
+                checkCount = checkCountFun(list);
+                checkAll.checked = (checkCount === list.length) ? true : false;
+            }
+            function checkStatus (list, status) {
+                list.forEach( item => {
+                    item.checked = (status === undefined) ? !item.checked : status;
+                });
+                checkCount = checkCountFun(lists);
+            }
+        }
+    </script>
+
+		<h1>第二题</h1>
+		<form action="./ok.html" class="test2">
+			<p>姓名：<input type="text" class="name" ></p>
+			<p>密码：<input type="password" class="passwd"></p>
+			<p>性别：
+				<input type="radio" name="sex" id="man">
+				<label for="male">男</label>
+				<input type="radio" name="sex" id="women">
+				<label for="female">女</label>
+			</p>
+			<p>年龄：
+				<select name="age" id="age">
+					<option value="18">18</option>
+					<option value="19">19</option>
+					<option value="20" selected>20</option>
+					<option value="21">21</option>
+					<option value="22">22</option>
+				</select>
+			</p>
+			<p>爱好：
+				<input type="checkbox" name="love" id="ts">
+				<label for="read">跳绳</label>
+				<input type="checkbox" name="love" id="lt">
+				<label for="music">聊天</label>
+				<input type="checkbox" name="love" id="tdx">
+				<label for="internet">谈对象</label>
+				<input type="checkbox" name="love" id="sdy">
+				<label for="internet">刷抖音</label>
+			</p>
+			<p>简介：<textarea name="introduce" id="introduce" cols="30" rows="10"></textarea></p>
+			<p>
+				<input type="submit">
+				<input type="reset">
+			</p>
+		</form>
+		<hr>
+		<script>
+			{
+            let submit = document.querySelector('.test2 input[type=submit]');
+            submit.onclick = function (e) {
+                let name = document.querySelector('.test2 .name');
+                let passwd = document.querySelector('.test2 .passwd');
+                let male = document.querySelector('#man');
+                let female = document.querySelector('#women');
+                let love1 = document.querySelector('#ts');
+                let love2 = document.querySelector('#lt');
+                let love3 = document.querySelector('#tdx');
+				let love4 = document.querySelector('#sdy');
+                let introduce = document.querySelector('.test2 #introduce');
+                if (name.value === '') {
+                    alert('请输入姓名！');
+                    e.preventDefault();
+                } else if (!(passwd.value.length >= 2 && passwd.value.length <= 10)) {
+                    alert('请输入2-10位密码！');
+                    e.preventDefault();
+                } else if (male.checked === female.checked) {
+                    alert('请选择性别！');
+                    e.preventDefault();
+                } else if (love1.checked === love2.checked && love2.checked === love3.checked && love4.checked !== true) {
+                    alert('请至少选择一个爱好！');
+                    e.preventDefault();
+                } else if (introduce.value.length < 10) {
+                    alert('简历至少10个字！');
+                    e.preventDefault();
+                }
+            }
+        }
+    </script>
+
+		<h1>第三题</h1>
+		<form action="./ok.html" class="test3">
+			<h2>Information Form</h2>
+			<dl>
+				<dt>name</dt>
+				<dd><input type="text" class="name2" ></dd>
+				<dt>pwd</dt>
+				<dd><input type="password" class="passwd2"></dd>
+				<dt>sex</dt>
+				<dd>
+					<input type="radio" name="sex" id="man">
+					<label for="man">男</label>
+					<input type="radio" name="sex" id="women">
+					<label for="women">女</label>
+				</dd>
+				<dt>age</dt>
+				<dd>
+					<select name="age3" id="age3">
+						<option value="1">18</option>
+						<option value="2">19</option>
+						<option value="3">20</option>
+						<option value="4">21</option>
+					</select>
+				</dd>
+				<dt>course</dt>
+				<dd>
+					<input type="checkbox" name="course" id="chinese">
+					<label for="chinese">语文</label>
+					<input type="checkbox" name="course" id="math">
+					<label for="math">数学</label>
+					<input type="checkbox" name="course" id="english">
+					<label for="english">外语</label>
+					<input type="checkbox" name="course" id="dl">
+					<label for="dl">地理</label>
+				</dd>
+				<dd>
+					<input type="submit" value="Submit it!">
+					<input type="reset" value="Reset it!">
+				</dd>
+			</dl>
+		</form>
+		<script>
+			{
+				let submit = document.querySelector('.test3 input[type="submit"]');
+				let name = document.querySelector('.name3');
+				let passwd = document.querySelector('.passwd3');
+				let male = document.querySelector('#man');
+				let female = document.querySelector('#women');
+				let course1 = document.querySelector('#chinese');
+				let course2 = document.querySelector('#math');
+				let course3 = document.querySelector('#english');
+				let course3 = document.querySelector('#dl');
+
+				submit.onclick = function(e) {
+					console.log(course1.checked + course2.checked + course3.checked);
+					if (name.value === '') {
+						alert('请输入姓名！');
+						e.preventDefault();
+					} else if (!(passwd.value.length >= 2 && passwd.value.length <= 10)) {
+						alert('请输入2-10位的密码！');
+						e.preventDefault();
+					} else if (male.checked === female.checked) {
+						alert('请选择性别！');
+						e.preventDefault();
+					} else if ((course1.checked + course2.checked + course3.checked) < 2) {
+						alert('请至少选择两个课程！');
+						e.preventDefault();
+					}
+				}
+			}
+		</script>
+	</body>
+</html>
