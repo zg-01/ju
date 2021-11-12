@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>第十一周作业</title>
+    <style>
+        ol,li > span {
+            cursor: pointer;
+        }
+        .text {
+            overflow: auto;
+            width: 800px;
+            height: 200px;
+            border: 1px solid red;
+        }
+       /* img {
+            width: 100%;
+        } */
+        pre{
+            width: 50%;
+            color: red;
+            padding: 10px;
+            font-family: Arial, Helvetica;
+            font-weight: bold;
+            font-size: 20px;
+            line-height: 25px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 第一题 start -->
+    <h1>第一题：jQuery制作增加删除元素效果</h1>
+    <input type="text" class="input" autofocus>
+    <button class="add">添加</button>
+    <button class="empty">清空</button>
+    <ol></ol>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>
+        $('.add').click( () => {
+            if($('.input').val() !== ''){
+                $('ol').prepend(`<li> <span>×</span> ${$('.input').val()}`);
+                $('ol li > span').click( function () {
+                    $(this).parent().remove();
+                });
+                $('.input').val('');
+            }else {
+                alert('请输入内容！')
+            }
+            $('.input').focus();
+        });
+        $('.empty').click( () => {
+            $('ol').text('');
+            $('.input').val('')
+            $('.input').focus();
+        });
+    </script>
+    <hr>
+    <!-- 第二题 start -->
+    <h1>第二题：SQL测试</h1>
+    <p>CBCBD BCDAA CACDB CABAD</p>
+    <hr>
+    <!-- 第三题 start -->
+    <h1>第三题：打印100以内的数字</h1>
+    <pre>
+        &lt;?php
+            for($i = 1; $i <= 100; $i++) {
+                echo $i . ' ';
+            }
+        ?&gt;
+    </pre>
+    <hr> 
+    <!-- 第四题 start -->
+    <h1>第四题：打印100以内的偶数</h1>
+    <pre>
+
+        &lt;?php
+            for($i = 1; $i <= 100; $i++) {
+                if($i % 2 === 0){
+                    echo $i . ' ';
+                }
+            }
+        ?&gt;
+    </pre>
+    <hr>
+    <!-- 第五题 start -->
+    <h1>第五题：打印100以内数字，3和5整除以foobar代替，3整除foo代替，5整除bar代替</h1>
+    <pre>
+        &lt;?php
+            for($i = 1; $i <= 100; $i++) {
+                if($i % 3 === 0 && $i % 5 === 0){
+                    echo 'foobar ';
+                }else if($i % 3 === 0){
+                    echo 'foo ';
+                }else if($i % 5 === 0){
+                    echo 'bar ';
+                }else{
+                    echo $i . ' ';
+                }
+            }
+        ?&gt;
+    </pre>
+</body>
+</html>
