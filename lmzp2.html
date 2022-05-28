@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			body {
+				perspective: 1000px;
+			}
+			section {
+				position: relative;
+				width: 300px;
+				height: 200px;
+				margin: 350px auto;
+				transform-style: preserve-3d;
+				animation: rotate 10s linear infinite;
+				background: url(media/pig.jpg) no-repeat;
+			}
+			section:hover{
+				animation-play-state: paused;
+			}
+			@keyframes rotate {
+				0%{
+					transform: rotateX(-20deg) rotateY(0);
+				}
+				100% {
+					transform: rotateX(-20deg) rotateY(360deg);
+				}
+			}
+			section div{
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background:url(media/dog.jpg) no-repeat;
+			}
+			section div:nth-child(1){
+				transform: rotateY(0) translateZ(300px);
+			}
+			section div:nth-child(2){
+				transform: rotateY(60deg) translateZ(300px);
+			}
+			section div:nth-child(3){
+				transform: rotateY(120deg) translateZ(300px);
+			}
+			section div:nth-child(4){
+				transform: rotateY(180deg) translateZ(300px);
+			}
+			section div:nth-child(5){
+				transform: rotateY(240deg) translateZ(300px);
+			}
+			section div:nth-child(6){
+				transform: rotateY(300deg) translateZ(300px);
+			}
+		</style>
+		</head>
+		<body>
+		<section>
+				<div><img src="img/t6.webp" width="300px"height="300px"></div>
+				<div><img src="img/t2.webp" width="300px"height="300px"></div>
+				<div><img src="img/t3.webp" width="300px"height="300px"></div>
+				<div><img src="img/t4.webp" width="300px"height="300px"></div>
+				<div><img src="img/t5.webp" width="300px"height="300px"></div>
+				<div><img src="img/t7.webp" width="300px"height="300px"></div>
+				<div><img src="img/t1.webp" width="300px"height="300px"></div>
+		</section>
+</body>
+</html>
